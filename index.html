@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/x-icon" href="/icons/favicon.ico" />
+		<link rel="manifest" href="manifest.json" />
+		<title>Bao thuc</title>
+		<style>
+			#noteInput {
+				resize: none;
+			}
+		</style>
+	</head>
+	<body lang="vi">
+		<main>
+			<form id="dateForm">
+				<label for="dateInput">Choose solar date</label>
+				<br />
+				<input name="date" id="dateInput" type="date" required />
+
+				<br />
+
+				<label for="noteInput">Your note</label>
+				<br />
+				<textarea name="note" id="noteInput" cols="30" rows="10" required></textarea>
+
+				<br />
+				<button>Create</button>
+			</form>
+
+			<div>
+				<ul id="notiList"></ul>
+			</div>
+		</main>
+		<script type="importmap">
+			{
+				"imports": {
+					"utils": "./utils.js"
+				}
+			}
+		</script>
+		<script type="module" src="./main.js"></script>
+	</body>
+</html>
