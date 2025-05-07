@@ -168,4 +168,9 @@ function getLunarDate(dd: number, mm: number, yyyy: number) {
 	return findLunarDate(jd, ly);
 }
 
-export { getLunarDate }
+const isLeapYear = (date: Date) => {
+	const year = date.getFullYear()
+	return year % 100 === 0 ? year % 400 === 0 : year % 4 === 0
+}
+
+export { getLunarDate, isLeapYear }
