@@ -1,1 +1,8 @@
-# Simple solar calendar day to vietnamese calendar day
+```
+npm install
+npm run dev
+```
+
+```
+open http://localhost:3000
+```
