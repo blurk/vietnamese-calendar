@@ -126,8 +126,8 @@ app.get('/', (c) => {
   const { CALENDAR_ID } = env<ENV>(c)
 
   const job = new CronJob(
-    // '0 0 0 1 * *', // cronTime
-    '10 * * * * *',
+    '0 0 0 1 * *', // cronTime
+    // '10 * * * * *',
     function () {
       console.log("cron RUN")
       checkAndSetEvent(CALENDAR_ID).catch((err) => {
