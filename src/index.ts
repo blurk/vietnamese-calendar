@@ -121,33 +121,40 @@ async function checkAndSetEvent(calendarId: string) {
   }
 }
 
+let job: any = null;
+
 app.get('/', (c) => {
 
   const { CALENDAR_ID } = env<ENV>(c)
 
-  const job = new CronJob(
-    '0 0 0 1 * *', // cronTime
-    // '10 * * * * *',
-    function () {
-      console.log("cron RUN")
-      checkAndSetEvent(CALENDAR_ID).catch((err) => {
-        job.stop()
-        console.log("cron STOP")
-        console.log(err.message)
-      })
-    }, // onTick
-    undefined, // onComplete
-    true, // start
-    'Asia/Ho_Chi_Minh' // timeZone
-  );
+  if (job === null) {
+    job = new CronJob(
+      '0 0 0 1 * *', // cronTime
+      // '10 * * * * *',
+      function () {
+        console.log("cron RUN")
+        checkAndSetEvent(CALENDAR_ID).catch((err) => {
+          job.stop()
+          console.log("cron STOP")
+          console.log(err.message)
+        })
+      }, // onTick
+      undefined, // onComplete
+      true, // start
+      'Asia/Ho_Chi_Minh' // timeZone
+    );
 
-  job.start()
-  console.log("job START")
+    job.start()
+    console.log("job START")
+  }
 
   return c.text("Whazzup!")
 })
 
-app.request('/')
+if (job === null) {
+  app.request('/')
+}
+
 
 serve({
   fetch: app.fetch,
