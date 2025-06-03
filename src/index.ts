@@ -6,12 +6,6 @@ import { getLunarDate, isLeapYear } from './utils.js'
 import { google } from 'googleapis'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { CronJob } from 'cron'
-import { env } from 'hono/adapter'
-
-type ENV = {
-  CALENDAR_ID: string
-}
 
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
 
