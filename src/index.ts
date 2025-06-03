@@ -121,40 +121,14 @@ async function checkAndSetEvent(calendarId: string) {
   }
 }
 
-let job: any = null;
+app.post('/trigger', (c) => {
+  checkAndSetEvent("nsinh6745@gmail.com").catch((err) => {
+    console.log(err.message)
+  })
 
-app.get('/', (c) => {
-
-  const { CALENDAR_ID } = env<ENV>(c)
-
-  if (job === null) {
-    job = new CronJob(
-      '0 0 0 1 * *', // cronTime
-      // '10 * * * * *',
-      function () {
-        console.log("cron RUN")
-        checkAndSetEvent(CALENDAR_ID).catch((err) => {
-          job.stop()
-          console.log("cron STOP")
-          console.log(err.message)
-        })
-      }, // onTick
-      undefined, // onComplete
-      true, // start
-      'Asia/Ho_Chi_Minh' // timeZone
-    );
-
-    job.start()
-    console.log("job START")
-  }
-
-  return c.text("Whazzup!")
+  c.status(200)
+  return c.text("OK")
 })
-
-if (job === null) {
-  app.request('/')
-}
-
 
 serve({
   fetch: app.fetch,
